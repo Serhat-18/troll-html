@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kahve İçelim Mi?</title>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        img {
+            width: 300px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        #no-button {
+            position: relative;
+        }
+		
+        @media (max-width: 600px) {
+            .buttons {
+                flex-direction: column;
+            }
+            
+            button {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Benimle date çıkarmısın ?</h1>
+        <img id="coffee-image" src="https://ih1.redbubble.net/image.5464342334.9312/bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.jpg">
+        <div class="buttons">
+            <button id="yes-button">Evet</button>
+            <button id="no-button">Hayır</button>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const noButton = document.getElementById('no-button');
+            const yesButton = document.getElementById('yes-button');
+            const coffeeImage = document.getElementById('coffee-image');
+
+            const images = [
+               "https://ih1.redbubble.net/image.5464342334.9312/bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.jpg"
+            ];
+            let currentImageIndex = 0;
+
+            noButton.addEventListener('mouseover', moveButton);
+            noButton.addEventListener('click', moveButton);
+
+            yesButton.addEventListener('click', function() {
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                coffeeImage.src = images[currentImageIndex];
+            });
+
+            function moveButton() {
+                const buttonRect = noButton.getBoundingClientRect();
+
+                const maxX = window.innerWidth - buttonRect.width;
+                const maxY = window.innerHeight - buttonRect.height;
+
+                const newX = Math.floor(Math.random() * maxX);
+                const newY = Math.floor(Math.random() * maxY);
+
+                noButton.style.position = 'fixed';
+                noButton.style.left = `${newX}px`;
+                noButton.style.top = `${newY}px`;
+            }
+        });
+    </script>
+</body>
+</html>
